@@ -1,0 +1,10 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "editor.formatOnSave": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+}

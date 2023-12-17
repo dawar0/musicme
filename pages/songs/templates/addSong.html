@@ -1,0 +1,89 @@
+{% extends "navbar.html"%}
+
+{% block content %}
+<script>
+</script>
+<div style="min-height:calc(100vh - 97px);
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            flex-direction:column;" , class="align-middle">
+
+  <div class="h-100 d-flex align-items-center">
+
+    <img src="{{url_for('static', filename='/ticket.png')}}" alt="logo" width="40" height="40" class="me-3 mb-1">
+    <h1 class="text-center">Add a song</h1>
+
+  </div>
+  <div class="container w-50 ">
+    <form action="{{ request.path }}" method="POST" class="grid" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <div class="container text-center gap-3">
+
+
+        <div class="row">
+
+          <div class="col p-1">
+            {{ form.name(class_="form-control", placeholder="Name")}}
+            {% for error in form.name.errors %}
+            {{ error }}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-1">
+            <input type="text" class="form-control" placeholder="Artist" name="artist" disabled value="{{user.name}}"">
+            {% for error in form.artist.errors %}
+            {{ error }}
+            {% endfor %}
+          </div>
+
+
+          <div class="row">
+            <div class="col p-1 ">
+              {{ form.description(class_="form-control", placeholder="Description")}}
+              {% for error in form.description.errors %}
+              {{ error }}
+              {% endfor%}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col p-1 d-flex flex-column align-items-start">
+              <h6>Cover</h6>
+              {{ form.image(class_="form-control", placeholder="Image", )}}
+              {% for error in form.description.errors %}
+              {{ error }}
+              {% endfor%}
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col p-1 d-flex flex-column align-items-start">
+              <h6>Song</h6>
+              {{ form.song(class_="form-control", placeholder="song")}}
+              {% for error in form.song.errors %}
+              {{ error }}
+              {% endfor%}
+
+            </div>
+
+            <button type="submit" class="btn btn-block btn-primary mb-3">
+              {{ buttonAction}}
+            </button>
+          </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+
+.album-image {
+  min-height: 70px;
+  width: 100px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 1rem;
+}
+
+progress::-webkit-progress-bar {
+  background-color: rgb(182, 180, 180);
+  width: 100%;
+  border-radius: 5px;
+}
+progress {
+  background-color: rgb(182, 180, 180);
+  border-radius: 5px;
+
+}
+.album-image {
+border-radius: 5px;
+}
+.media-player-container {
+  background: rgba(0,0,0,0.3);
+  backdrop-filter:  blur(5px);
+}
+
+/* value: */
+progress::-webkit-progress-value {
+  background-color: #0d6efd !important;
+  border-radius: 5px;
+
+}
+progress::-moz-progress-bar {
+  background-color: #0d6efd !important;
+  border-radius: 5px;
+
+}
+progress {
+  color: #0d6efd;
+  border-radius: 5px;
+
+}
+
+  .audio-player {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    width: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
+    .player-controls{
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      #seek-obj {
+        width: 100%;
+        height: 7px;
+        border-radius: 5px;
+        
+      }
+    }
+ 
+  }
+
+  .countdown-timer, .countdown-timer-bar {
+    width: "100%";
+    height: 0.2rem;
+    background-color: var(--secondary);
+    border-radius: 0.15rem;
+  }
+  
+  .countdown-timer { margin: 2rem 0; }
+  
+  .countdown-timer-bar {
+    background-color: var(--primary);
+    transform-origin: left;
+  }
+  
+  @keyframes countdown {
+    to {
+      transform: scaleX(0);
+    }
+  }
+  
+  .animate { animation: countdown var(--duration) linear forwards; } 
+  

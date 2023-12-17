@@ -1,0 +1,105 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<script>
+</script>
+<div style="min-height:calc(100vh - 97px);
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            flex-direction:column;", 
+            class="align-middle">
+
+  <div class="h-100 d-flex align-items-center">
+
+    <img src="{{url_for('static', filename='/ticket.png')}}" alt="logo" width="40" height="40" class="me-3 mb-1">
+    <h1 class="text-center">MusicMe</h1>
+
+  </div>
+  <div class ="container w-50 ">
+    <form action="{{ request.path }}" method="POST" class="grid">
+      {{ form.csrf_token }} 
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %} 
+      {% for category, message in messages %}
+      <div
+        class="alert alert-{{category}} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} 
+      {% endif %} 
+      {% endwith %} 
+
+      <div class="container text-center gap-3">
+        {% if request.path == '/register' or request.path == '/register/' %}
+          <div class="row">
+          <div class="col p-1 ">
+                  {{ form.name(class_="form-control", placeholder="Name")}} 
+                  {% for error in form.name.errors %} 
+                  {{ error }} 
+                  {% endfor%}
+            </div>
+          </div>
+        {% endif %} 
+
+        
+        <div class = "row"> 
+          {% if request.path == '/register' or request.path == '/register/' %}
+            <div class="col p-1 ">
+                {{ form.username(class_="form-control", placeholder="Username")}} 
+                {% for error in form.username.errors %} 
+                {{ error }} 
+                {% endfor%}
+            </div>
+            
+          {% endif %} 
+        
+        <div class="col p-1">
+          {{ form.email(class_="form-control", placeholder="Email")}}
+          {% for error in form.email.errors %} 
+            {{ error }} 
+          {% endfor %} 
+        </div>  
+        </div>  
+        
+        <div class="row">
+          <div class="col p-1 ">
+            {{ form.password(class_="form-control", placeholder="Password")}} 
+            {% for error in form.password.errors %}
+              {{ error }}
+            {% endfor%} 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col p-1 ">
+            {% if request.path == '/register/' or request.path == '/register' %}
+              {{ form.confirmPassword(class_="form-control",placeholder="Confirm Password")}}
+              {% for error in form.confirmPassword.errors %} {{ error }} {% endfor%} 
+            {%endif%}
+          </div>
+        </div>
+
+      <button type="submit" class="btn btn-block btn-primary mb-3">
+        {{ buttonAction}}
+      </button>
+      </div>
+
+      <p>
+        {% if request.path == '/register/' or  request.path == '/register' %} 
+        Already have an account?
+        <a href="{{url_for('auth.login')}}">Login</a>
+        {% else %} New here? <a href="{{url_for('auth.register')}}">Create account</a>
+        {% endif %}
+      </p>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block navbar%}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <img src="{{url_for('static', filename='/ticket.png')}}" alt="logo" width="30" height="30"
+      class="d-inline-block align-text-top me-3">
+    <a class="navbar-brand" href="{{url_for('index.home')}}">MusicMe</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item d-flex align-items-center justify ">
+      
+        </li>
+
+
+      </ul>
+      <div class="d-flex flex-md-column-reverse flex-sm-column-reverse flex-lg-row" id="leftSideOfNav">
+        <div class="d-flex mt-md-3 mt-sm-3 mt-lg-0">
+          <button id="collapseSearchButton" class="btn btn-outline-secondary me-3 " type="button"
+            data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false"
+            aria-controls="collapseExample">
+            <i class="bi bi-search"></i>
+          </button>
+          <div class="collapse collapse-horizontal" id="collapseExample">
+            <form action="{{url_for('search.searchSongs')}}" method="get" class="d-flex ">
+              <input class="form-control me-2" type="search" name="searchTerm" placeholder="Find a song..."
+                aria-label="Search">
+              <button class="btn btn-outline-secondary ms-1 me-2  " type="submit">Search</button>
+              </form>
+          </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="dropdown-center ">
+          <a class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Hi there, {{user.name}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuButton1">
+
+            <li><a class="dropdown-item" href="{{url_for('auth.logout')}}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{url_for('songs.addSong')}}">Published Songs</a></li>
+
+            <li><a class="dropdown-item" href="{{url_for('auth.logout')}}">Logout</a></li>
+          </ul>
+        </div>
+        {% else %}
+        <div>
+          <a class="btn btn-primary" href="{{url_for('auth.login')}}" role="button">Login</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+  const myCollapsible = document.getElementById('collapseExample')
+  const searchButton = $('#collapseSearchButton')
+  myCollapsible.addEventListener('hidden.bs.collapse', event => {
+    searchButton.html('<i class="bi bi-search"></i>')
+
+  })
+
+  myCollapsible.addEventListener('shown.bs.collapse', event => {
+    searchButton.html('<i class="bi bi-x-lg"></i>')
+  })
+
+</script>
+
+{% endblock %}
+
+{% block content %} {% endblock %}
